@@ -6,7 +6,7 @@
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:39:06 by froussel          #+#    #+#             */
-/*   Updated: 2019/10/30 18:10:09 by froussel         ###   ########.fr       */
+/*   Updated: 2019/11/01 18:59:28 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ int		writer(const char *format, t_arg *narg, int len)
 	i = -1;
 	while (format[++i])
 	{
-		if (format[i] == '%' && format[i + 1] == '%')
-			len += ft_putchar_fd_len(format[i++], 1);//
-		else if (format[i] == '%')//%is a flag
+		if (format[i] == '%')
 		{
 			i++;
-			while (!(first_in_set(format[i], "cspdiuxX")))
+			while (!(first_in_set(format[i], "cspdiuxX%")))
 				i++;
 			len = write_arg(narg, len);
 			narg = narg->next;
@@ -72,7 +70,12 @@ int		write_width(t_arg *narg, int len)
 	if ((narg->prec && narg->precision < narg->len//
 		&& (narg->type == 's')) || (narg->precision > narg->len
 		&& (narg->type != 's')))
-		narg->width -= narg->precision;
+	{
+		if (narg->precision < 0)
+			narg->width -= narg->len;
+		else
+			narg->width -= narg->precision;
+	}
 	else
 		narg->width -= narg->len;//
 	if (narg->width > 0)
@@ -85,7 +88,7 @@ int		write_precision(t_arg *narg, int len)
 {
 	if (narg->type == 's')
 		len += ft_putnstr_fd(narg->arg, 1, narg->precision);
-	else if (narg->type == 'c' || narg->type == 'p')
+	else if (narg->type == 'c' || narg->type == 'p' || narg->type == '%')
 		return (len += ft_putstr_fd_len(narg->arg, 1));
 	else
 	{
