@@ -29,7 +29,7 @@ int main ()
    	int no = 255;
    	int hex = 0X96;
    	unsigned int ui= 123456789;
-/*	
+	
 	printf(B"=====================PRINTF VS FT_PRINTF=====================\n\n");
 	printf("============== gestion de converstion simple ===================\n");
 	printf("---------------------	  all type      ---------------------\n"S);
@@ -239,14 +239,14 @@ int main ()
    	j=ft_printf("Double -%--*s neg %--*s|\n", 5,"le42",-5,"le42");//undefined behavior
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
- */	
+ /*	
 	printf(B"--------------- TEST 7 -------------\n"S);
 	i=printf("%00*.*d|\n",5,-14,32);
 	printf("%005.d|\n",32);
    	j=ft_printf("%00*.*d|\n",5,-14,32);
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-
+*/
 /*cas impeu chelou rien a battre ?
    	i=printf("|%*.-30d|\n", 5, 15);
    	j=ft_printf("|%*.-30d|\n", 5, 15);
