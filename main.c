@@ -6,7 +6,7 @@
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:37:54 by froussel          #+#    #+#             */
-/*   Updated: 2019/11/01 18:59:23 by froussel         ###   ########.fr       */
+/*   Updated: 2019/11/03 18:08:04 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main ()
    	int no = 255;
    	int hex = 0X96;
    	unsigned int ui= 123456789;
-	
+
 	printf(B"=====================PRINTF VS FT_PRINTF=====================\n\n");
 	printf("============== gestion de converstion simple ===================\n");
 	printf("---------------------	  all type      ---------------------\n"S);
@@ -230,23 +230,45 @@ int main ()
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 	printf(B"--------------- TEST 7 -------------\n"S);
-	i=printf("Double -%00*.*d neg %00*.*d neg %00*.*d|\n",5,3,10,-5,-3,10,5,-14,10);
-   	j=ft_printf("Double -%00*.*d neg %00*.*d neg %00*.*d|\n",5,3,10,-5,-3,10,5,-14,10);
+	i=printf("Double -%00*.*d neg %00*.*d neg %00*.*d| %005.0d| |%005.d|\n",5,3,10,-5,-3,10,5,-14,10, 32, 42);
+   	j=ft_printf("Double -%00*.*d neg %00*.*d neg %00*.*d| %005.0d| |%005.d|\n",5,3,10,-5,-3,10,5,-14,10, 32, 42);
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-	printf(B"--------------- TEST 8 -------------\n"S);
+	printf(B"----------TEST 8 undifined behavior-------------\n"S);
+	i=printf("Double -%00*.*s neg %00*.*s neg %00*.*s| %005.0s| |%005.s|\n",5,3,"10",-5,-3,"10",5,-14,"10", "32", "42");
+   	j=ft_printf("Double -%00*.*s neg %00*.*s neg %00*.*s| %005.0s| |%005.s|\n",5,3,"10",-5,-3,"10",5,-14,"10", "32", "42");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 9 -------------\n"S);
 	i=printf("Double -%--*s neg %--*s|\n", 5,"le42",-5,"le42");//undefined behavior
    	j=ft_printf("Double -%--*s neg %--*s|\n", 5,"le42",-5,"le42");//undefined behavior
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
- /*	
-	printf(B"--------------- TEST 7 -------------\n"S);
-	i=printf("%00*.*d|\n",5,-14,32);
-	printf("%005.d|\n",32);
-   	j=ft_printf("%00*.*d|\n",5,-14,32);
+	
+	printf(B"================= test with bag instruction =====================\n"S);
+	printf(B"--------------- TEST 1 -------------\n"S);
+	i=printf("bojour %05y\n");
+   	j= ft_printf("bojour %05y\n");
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+/*	printf(B"--------------- TEST 2 -------------\n"S);
+	i=printf("salut %05");
+   	j= ft_printf("salut %05");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 3 -------------\n"S);
+	i=printf("salut %05 %05d\n", 5);
+   	j= ft_printf("salut %05 %05d\n", 5);
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+
+	//i=printf("salut %");
+	i=printf("salut %05 mon cul");
+	printf("\n");
+	i=ft_printf("salut %05 mon cul");
+	//i=printf("salut %05");
 */
+
 /*cas impeu chelou rien a battre ?
    	i=printf("|%*.-30d|\n", 5, 15);
    	j=ft_printf("|%*.-30d|\n", 5, 15);

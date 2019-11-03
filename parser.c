@@ -6,10 +6,10 @@
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:26:27 by froussel          #+#    #+#             */
-/*   Updated: 2019/11/01 18:59:30 by froussel         ###   ########.fr       */
+/*   Updated: 2019/11/03 18:08:09 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#define DP printf(‘’%s : %d”, __FILE__, __LINE__ );
+//#define DP printf(‘’%s : %d”, __FILE__, __LINE__ );
 #include "ft_printf.h"
 void	parse_flag(char *str, t_arg *narg, va_list ap);
 void	parser(const char *format, va_list ap, t_arg **lst)
@@ -22,35 +22,30 @@ void	parser(const char *format, va_list ap, t_arg **lst)
 	i = -1;
 	while (format[++i])
 	{
-		//if (format[i] == '%' && format[i + 1] == '%')
-		//	i++;
 		if (format[i] == '%')
 		{
 			//printf("i =%d\n", i);
 			start = ++i;
-			while (!(first_in_set(format[i], "cspdiuxX%")))//flag %
+				/*&& first_in_set(format[i], "0123456789.-*"))*/
+			while (!(first_in_set(format[i], "cspdiuxX%")))
 				i++;
 			str = ft_substr(format, start, i);
-			//printf("ICI DEBUGG str =!%s! start=!%d! !i=%d!\n", str, start, i);
+		//	printf("oooh =|%s|\n", str);
 			narg = argnew(format[i]);
-			//parse_width_sign(str, narg, ap);
-			//parse_digit(str, narg, ap);
 			parse_flag(str, narg, ap);
-			parse_precision(str, narg, ap);
-			
 			parse_arg(narg, ap);
 			arg_lstadd_back(lst, narg);
 			free(str);
 		}
 	}
 }
-//RIP
+
 void	parse_flag(char *str, t_arg *narg, va_list ap)
 {
 	int i;
 	int var;
 	int start;
-
+	
 	i = -1;
 	var = 0;
 	while(str[++i] && str[i] != '.')
@@ -64,12 +59,16 @@ void	parse_flag(char *str, t_arg *narg, va_list ap)
 			start = i;
 			while (ft_isdigit(str[i + 1]))
 				i++;
-			var = ft_atoi(ft_substr(str, start, i + 1));//changer substr
+			var = ft_atoi(ft_substr(str, start, i + 1));
 		}
 	}
-	if (str[0] == '0' && narg->sign != -1 && str[i] == '\0')
+	parse_precision(&str[i], narg, ap);
+	if (str[0] == '0' && narg->sign != -1 &&
+		(narg->precision < 0  || narg->prec == 0 || narg->type == 's'))
 		narg->digit = var;
-	narg->width = (var < 0) ? var * -1 : var;
+	else
+		narg->width = (var < 0) ? var * -1 : var;
+	//printf("!%d!/n", narg->digit);
 }
 
 void	parse_precision(char *str, t_arg *narg, va_list ap)
@@ -80,8 +79,8 @@ void	parse_precision(char *str, t_arg *narg, va_list ap)
 
 	i = 0;
 	var = 0;
-	while (str[i] && str[i] != '.')
-		i++;
+	//while (str[i] && str[i] != '.')
+	//	i++;
 	if (str[i] == '.')
 	{
 		narg->prec = 1;
@@ -160,12 +159,13 @@ void	parse_arg(t_arg *narg, va_list ap)
 		narg->arg = dec_to_hex(va_arg(ap, unsigned int), 'A');
 	else if (narg->type == '%')
 		narg->arg = ft_strdup("%");
+	//else
+	//	narg->arg = ft_strdup(ft_strdup("\0"));//
+
 	if (narg->arg == NULL)
 		narg->arg = ft_strdup("(null)");
-	if (narg->type == 'c')
+	if (narg->type == 'c' /*|| !first_in_set(narg->type, "spdiuxX%")*/)
 		narg->len = 1;
 	else
 		narg->len = ft_strlen(narg->arg);
-	//if (narg->precision < 0)
-	//	narg->precision *= -1; 
 }

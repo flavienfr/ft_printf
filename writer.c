@@ -6,7 +6,7 @@
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:39:06 by froussel          #+#    #+#             */
-/*   Updated: 2019/11/01 18:59:28 by froussel         ###   ########.fr       */
+/*   Updated: 2019/11/03 18:08:12 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ int		writer(const char *format, t_arg *narg, int len)
 	i = -1;
 	while (format[++i])
 	{
+		//printf("llla= %d\n", i);
 		if (format[i] == '%')
 		{
 			i++;
+			/*&& first_in_set(format[i], "0123456789.-*")*/
 			while (!(first_in_set(format[i], "cspdiuxX%")))
 				i++;
 			len = write_arg(narg, len);
@@ -58,10 +60,16 @@ int		write_arg(t_arg *narg, int len)
 
 int		write_digit(t_arg *narg, int len)
 {
-	narg->digit -= narg->len;
+	if (narg->prec && narg->type == 's'&& narg->precision >= 0 && narg->precision < narg->len )
+		narg->digit -= narg->precision;
+	else
+		narg->digit -= narg->len;
 	if (narg->digit > 0)
 		len += fill_in(narg->digit, '0');
-	len += ft_putstr_fd_len(narg->arg, 1);
+	if (narg->prec && narg->precision < len  && narg->type == 's')
+		len += ft_putnstr_fd(narg->arg, 1, narg->precision);
+	else
+		len += ft_putstr_fd_len(narg->arg, 1);
 	return (len);
 }
 
