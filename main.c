@@ -6,7 +6,7 @@
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:37:54 by froussel          #+#    #+#             */
-/*   Updated: 2019/11/03 18:08:04 by froussel         ###   ########.fr       */
+/*   Updated: 2019/11/04 17:39:27 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 int main ()
 {
-	int i = -1, j = -1;
+	int i = 0, j = 0;
    	char ch = 'A';
    	char *str = "abcdef";
 	void *ptr = str;
@@ -244,40 +244,79 @@ int main ()
    	j=ft_printf("Double -%--*s neg %--*s|\n", 5,"le42",-5,"le42");//undefined behavior
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-	
+
 	printf(B"================= test with bag instruction =====================\n"S);
 	printf(B"--------------- TEST 1 -------------\n"S);
 	i=printf("bojour %05y\n");
    	j= ft_printf("bojour %05y\n");
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-/*	printf(B"--------------- TEST 2 -------------\n"S);
+	printf(B"--------------- TEST 2 -------------\n"S);
 	i=printf("salut %05");
    	j= ft_printf("salut %05");
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 	printf(B"--------------- TEST 3 -------------\n"S);
-	i=printf("salut %05 %05d\n", 5);
-   	j= ft_printf("salut %05 %05d\n", 5);
+	i=printf("salut %05-%05d\n", 5);
+   	j= ft_printf("salut %05-%05d\n", 5);
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-
-	//i=printf("salut %");
-	i=printf("salut %05 mon cul");
+	printf(B"--------------- TEST 4 -------------\n"S);
+	i=printf("salut %05mon cul");
 	printf("\n");
-	i=ft_printf("salut %05 mon cul");
-	//i=printf("salut %05");
-*/
-
-/*cas impeu chelou rien a battre ?
+   	j= ft_printf("salut %05mon cul");
+	printf("\n");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 5 -------------\n"S);
+	i =printf("salut%05");
+	printf("|\n");
+	i+=printf("salut%m    ");
+	i+=printf("|\n");
+	i+=printf("salut%05m    ");
+	i+=printf("|\n");
+	i+=printf("salut%mmbmbr   ");
+	i+=printf("|\n");
+	printf("--------- vs ---------\n");
+	j=ft_printf("salut%05");
+	printf("|\n");
+	j+=ft_printf("salut%m    ");
+	j+=ft_printf("|\n");
+	j+=ft_printf("salut%05m    ");
+	j+=ft_printf("|\n");
+	j+=ft_printf("salut%mmbmbr   ");
+	j+=ft_printf("|\n");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 6 -------------\n"S);
+	i=printf("salut%-5monnom");
+	i+=printf("|\n");
+	i+=printf("salut%-5mon s %rnom");
+	i+=printf("|\n");
+	printf("--------- vs ---------\n");
+	j=ft_printf("salut%-5monnom");
+	j+=ft_printf("|\n");
+	j+=ft_printf("salut%-5mon s %rnom");
+	j+=ft_printf("|\n");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+/*
+	printf(B"===== cas impeu chelou rien a batre ? ========\n"S);
+	printf(B"--------------- TEST 1 -------------\n"S);
    	i=printf("|%*.-30d|\n", 5, 15);
    	j=ft_printf("|%*.-30d|\n", 5, 15);
-printf("\n");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 2 -------------\n"S);
 	i=printf("|%10.-15d|\n",no);
    	j=ft_printf("|%10.-15d|\n",no);
-printf("\n");*/
-//i=printf("...%.......5d..%....%-5d....%...*d..\n", 14, 14, -5);
-//j=ft_printf("...%.......5d..%....%-5d....%...*d..\n", 14, 14, -5);
-
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 3 -------------\n"S);
+	i=printf("...%.......5d..%....%-5d....%...*d..\n", 14, 14, -5);
+	j=ft_printf("...%.......5d..%....%-5d....%...*d..\n", 14, 14, -5);
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+*/
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 13:52:09 by froussel          #+#    #+#             */
-/*   Updated: 2019/11/01 13:22:04 by froussel         ###   ########.fr       */
+/*   Updated: 2019/11/04 17:06:41 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,9 @@ void	arg_lstadd_back(t_arg **alst, t_arg *new);
 
 //parser
 void	parser(const char *format, va_list ap, t_arg **lst);
-void	parse_width_sign(char *str, t_arg *narg, va_list ap);
-void	parse_digit(char *str, t_arg *narg, va_list ap);
-void	parse_precision(char *str, t_arg *narg, va_list ap);
-void	parse_arg(t_arg *narg, va_list ap);
 
 //writer
 int		writer(const char *format, t_arg *narg, int len);
-int		write_arg(t_arg *narg, int len);
-int		write_digit(t_arg *narg, int len);
-int		write_width(t_arg *narg, int len);
-int		write_precision(t_arg *narg, int len);
 
 //utils_1
 char	*chr_to_str(char c);

@@ -6,7 +6,7 @@
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 13:49:20 by froussel          #+#    #+#             */
-/*   Updated: 2019/11/01 17:31:08 by froussel         ###   ########.fr       */
+/*   Updated: 2019/11/04 17:39:41 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 /*
 ** Check format string
 ** Check args == arg de string // Pas possible ?
-** Read lanceur de fonction 
+** Read lanceur de fonction
 ** Fonction affiche ui i d..
-** Fonctions flags (str appart ?) 
+** Fonctions flags (str appart ?)
 **
 ** Gerer les erreur de compilation (boucle infini ou return)????
 */
@@ -43,22 +43,15 @@ int		ft_printf(const char *format, ...)
 	return (len);
 }
 
-t_arg	*argnew(char type)
+void	arg_lstdelone(t_arg *lst)
 {
-	t_arg	*new;
-
-	if (!(new = malloc(sizeof(*new))))
-		return (NULL);
-	new->type = type;
-	new->width = 0;
-	new->digit = 0;
-	new->precision = 0;
-	new->prec = 0;
-	new->sign = 0;
-	new->len = 0;
-	new->arg = NULL;
-	new->next = NULL;
-	return (new);
+	if (!lst)
+		return ;
+//	printf("=====================================>!%s!\n", lst->arg);
+	if (lst->arg)
+		free(lst->arg);
+	free(lst);
+	lst = NULL;
 }
 
 void	arg_lstclear(t_arg **lst)
@@ -77,14 +70,22 @@ void	arg_lstclear(t_arg **lst)
 	}
 }
 
-void	arg_lstdelone(t_arg *lst)
+t_arg	*argnew(char type)
 {
-	if (!lst)
-		return ;
-	if (lst->type == 'd')
-		free(lst->arg);
-	free(lst);
-	lst = NULL;
+	t_arg	*new;
+
+	if (!(new = malloc(sizeof(*new))))
+		return (NULL);
+	new->type = type;
+	new->width = 0;
+	new->digit = 0;
+	new->precision = 0;
+	new->prec = 0;
+	new->sign = 0;
+	new->len = 0;
+	new->arg = NULL;
+	new->next = NULL;
+	return (new);
 }
 
 void	arg_lstadd_back(t_arg **alst, t_arg *new)
