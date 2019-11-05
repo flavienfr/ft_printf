@@ -40,6 +40,7 @@ int		ft_printf(const char *format, ...)
 	len = writer(format, *lst, len);
 	va_end(ap);
 	arg_lstclear(lst);
+	free(lst);
 	return (len);
 }
 
@@ -47,7 +48,6 @@ void	arg_lstdelone(t_arg *lst)
 {
 	if (!lst)
 		return ;
-//	printf("=====================================>!%s!\n", lst->arg);
 	if (lst->arg)
 		free(lst->arg);
 	free(lst);

@@ -6,7 +6,7 @@
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:37:54 by froussel          #+#    #+#             */
-/*   Updated: 2019/11/04 17:39:27 by froussel         ###   ########.fr       */
+/*   Updated: 2019/11/05 14:03:16 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int main ()
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 	printf(B"-------- TEST 2 (* width) ---------\n"S);
    	i=printf("|%*s|,|%*s|,|%*s|,|%*s|,|%*s|,|%*s|\n",0,txt,10,txt,26,txt,-0,txt,-25,txt,-30,txt);
-   	j=ft_printf("|%*s|,|%*s|,|%*s|,|%*s|,|%*s|,|%*s|\n",0,txt,10,txt,26,txt,-0,txt,-25,txt,-30,txt);
+	j=ft_printf("|%*s|,|%*s|,|%*s|,|%*s|,|%*s|,|%*s|\n",0,txt,10,txt,26,txt,-0,txt,-25,txt,-30,txt);
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 	printf(B"-------- TEST 3 (* precision) ---------\n"S);
@@ -168,7 +168,7 @@ int main ()
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 	printf(B"---- TEST 7 (* width & precision) -----\n"S);
-   	i=printf("|%*.*s|,|%*.*s|,|%*.*s|\n",-5, 5,txt, -28, -10,txt, 10, -30,txt);
+	i=printf("|%*.*s|,|%*.*s|,|%*.*s|\n",-5, 5,txt, -28, -10,txt, 10, -30,txt);
    	j=ft_printf("|%*.*s|,|%*.*s|,|%*.*s|\n",-5, 5,txt, -28, -10,txt, 10, -30,txt);
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
@@ -176,6 +176,7 @@ int main ()
    	i=printf("|%*.*s|,|%*.*s|,|%*.*s|,|%*.*s|\n",0, 15,txt, 10 ,10,txt, 20, 15,txt, 25, 25,txt);
    	j=ft_printf("|%*.*s|,|%*.*s|,|%*.*s|,|%*.*s|\n",0, 15,txt, 10 ,10,txt, 20, 15,txt, 25, 25,txt);
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 	printf(B"---- TEST 9 (* width & precision) -----\n"S);
    	i=printf("|%10.*s|,|%27.*s|,|%40.*s|,|%*.25s|\n",15,txt,29,txt, 0,txt, 25,txt);
    	j=ft_printf("|%10.*s|,|%27.*s|,|%40.*s|,|%*.25s|\n",15,txt,29,txt, 0,txt, 25,txt);
@@ -244,6 +245,11 @@ int main ()
    	j=ft_printf("Double -%--*s neg %--*s|\n", 5,"le42",-5,"le42");//undefined behavior
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 10 -------------\n"S);
+	i=printf("%2-*0*s|\n", 10, 16, "bonjor");
+	j=ft_printf("%2-*0*s|\n", 10, 16, "bonjor");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 
 	printf(B"================= test with bag instruction =====================\n"S);
 	printf(B"--------------- TEST 1 -------------\n"S);
@@ -300,6 +306,14 @@ int main ()
 	j+=ft_printf("|\n");
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 7 -------------\n"S);
+	i=printf("%05s, %10s, %-10.3s|\n", NULL, NULL, NULL);
+	j=ft_printf("%05s, %10s, %-10.3s|\n", NULL, NULL, NULL);
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+
+	
+
 /*
 	printf(B"===== cas impeu chelou rien a batre ? ========\n"S);
 	printf(B"--------------- TEST 1 -------------\n"S);
@@ -318,5 +332,9 @@ int main ()
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 */
+
 	return 0;
 }
+
+//DEBOX TENSORFLOW
+//aurelien ajeron

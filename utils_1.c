@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char	*chr_to_str(char c)
+char		*chr_to_str(char c)
 {
 	char *str;
 
@@ -22,15 +22,13 @@ char	*chr_to_str(char c)
 	return (str);
 }
 
-char	*dec_to_hex(long int dec, char c)
+char		*dec_to_hex(long int dec, char c)
 {
 	char	shex[20];
 	char	*dhex;
 	int		i;
 	int		j;
-	
-	//if (dec < 0)
-	//	dec = 4294967296 + dec;
+
 	i = 0;
 	while (dec)
 	{
@@ -51,15 +49,17 @@ char	*dec_to_hex(long int dec, char c)
 	return (dhex);
 }
 
-int		first_in_set(char c, char *set)
+char		*address_ptr(void *ptr)
 {
-	while (*set)
-	{
-		if (*set == c)
-			return (1);
-		set++;
-	}
-	return (0);
+	char		*p;
+	char		*tmp;
+	long int	add;
+
+	add = (long int)&*ptr;
+	tmp = dec_to_hex(add, 'a');
+	p = ft_strjoin("0x", tmp);
+	free(tmp);
+	return (p);
 }
 
 static int	len(long int n)

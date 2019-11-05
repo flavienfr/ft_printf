@@ -44,15 +44,17 @@ void	parser(const char *format, va_list ap, t_arg **lst);
 int		writer(const char *format, t_arg *narg, int len);
 
 //utils_1
-char	*chr_to_str(char c);
+
 char	*dec_to_hex(long int dec, char c);
 int		first_in_set(char c, char *set);
 char	*ft_itoa_long(long n);
+char	*address_ptr(void *ptr);
 
 //utils_2
 int		fill_in(int field, char c);
 int		ft_putnstr_fd(char *s, int fd, int n);
 int		ft_putchar_fd_len(char c, int fd);
 int		ft_putstr_fd_len(char *s, int fd);
+char	*chr_to_str(char c);
 
 #endif

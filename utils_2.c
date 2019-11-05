@@ -53,3 +53,14 @@ int		ft_putstr_fd_len(char *s, int fd)
 		ft_putchar_fd(s[i], fd);
 	return (i);
 }
+
+int		first_in_set(char c, char *set)
+{
+	while (*set)
+	{
+		if (*set == c)
+			return (1);
+		set++;
+	}
+	return (0);
+}
