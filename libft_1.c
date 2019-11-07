@@ -1,68 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   libft_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/25 18:03:28 by froussel          #+#    #+#             */
-/*   Updated: 2019/11/04 17:39:32 by froussel         ###   ########.fr       */
+/*   Created: 2019/11/07 11:26:28 by froussel          #+#    #+#             */
+/*   Updated: 2019/11/07 11:31:19 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*chr_to_str(char c)
+int			ft_atoi(const char *str)
 {
-	char *str;
+	int i;
+	int out;
+	int is_minus;
 
-	if (!(str = calloc(2, sizeof(*str))))
-		return (NULL);
-	*str = c;
-	return (str);
+	is_minus = 0;
+	i = 0;
+	out = 0;
+	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
+			|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			is_minus++;
+		i++;
+	}
+	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
+	{
+		out = out * 10 + (str[i] - 48);
+		i++;
+	}
+	if (is_minus)
+		out *= -1;
+	return (out);
 }
 
-char		*dec_to_hex(long int dec, char c)
+void		*ft_calloc(size_t count, size_t size)
 {
-	char	shex[20];
-	char	*dhex;
-	int		i;
-	int		j;
+	unsigned char	*ptr;
+	size_t			i;
 
 	i = 0;
-	while (dec)
-	{
-		if ((dec % 16) < 10)
-			shex[i++] = (dec % 16) + '0';
-		else
-			shex[i++] = (dec % 16) - 10 + c;
-		dec = dec / 16;
-	}
-	if (i == 0)
-		shex[i++] = '0';
-	if (!(dhex = malloc(sizeof(*dhex) * (i + 1))))
-		return (NULL);
-	dhex[i] = '\0';
-	j = 0;
-	while (--i >= 0)
-		dhex[j++] = shex[i];
-	return (dhex);
+	size *= count;
+	if (!(ptr = (unsigned char *)malloc(size)))
+		return (0);
+	while (i < size)
+		ptr[i++] = '\0';
+	return (ptr);
 }
 
-char		*address_ptr(void *ptr)
+int			ft_isdigit(int c)
 {
-	char		*p;
-	char		*tmp;
-	long int	add;
-
-	add = (long int)&*ptr;
-	tmp = dec_to_hex(add, 'a');
-	if (add == 0)
-		p = ft_strdup("0x");
-	else
-		p = ft_strjoin("0x", tmp);
-	free(tmp);
-	return (p);
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }
 
 static int	len(long int n)
@@ -85,7 +81,7 @@ static int	len(long int n)
 	return (len);
 }
 
-char		*ft_itoa_long(long n)
+char		*ft_itoa(int n)
 {
 	long int	i;
 	long int	nn;

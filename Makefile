@@ -1,4 +1,4 @@
-SRCS = ft_printf.c parser.c writer.c utils_1.c utilis_2.c
+SRCS = ft_printf.c parser.c writer.c utils_1.c utils_2.c libft_1.c libft_2.c
 
 NAME = libftprintf.a
 
@@ -9,19 +9,16 @@ FLAGS = -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) : ${OBJS}
-		make -C libft
 		ar rc $(NAME) ${OBJS}
 		ranlib $(NAME)
 
-.c.o : ${SRCSb}
+.c.o : ${SRCS}
 		gcc ${FLAGS} -c $< -o ${<:.c=.o}
 
 clean :
-		make clean -C libft
-		rm -f ${OBJSb}
+		rm -f ${OBJS}
 
 fclean : clean
-		make fclean -C libft
 		rm -f $(NAME)
 
 re : fclean

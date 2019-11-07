@@ -33,8 +33,6 @@ static void	parse_precision(char *str, t_arg *narg, va_list ap)
 {
 	int		i;
 	int		var;
-	int		start;
-	char	*tmp;
 
 	i = 0;
 	var = 0;
@@ -54,9 +52,7 @@ static void	parse_precision(char *str, t_arg *narg, va_list ap)
 static void	parse_flag(char *str, t_arg *narg, va_list ap)
 {
 	int		var;
-	int		start;
 	int		i;
-	char	*tmp;
 
 	i = -1;
 	var = 0;
@@ -70,7 +66,8 @@ static void	parse_flag(char *str, t_arg *narg, va_list ap)
 	}
 	parse_precision(&str[i], narg, ap);
 	if (str[0] == '0' && narg->sign != -1 &&
-		(narg->precision < 0 || narg->prec == 0 || narg->type == 's'))
+		(narg->precision < 0 || narg->prec == 0 || narg->type == 's'
+		|| narg->type == 'c' || narg->type == '%'))
 		narg->digit = var;
 	else
 		narg->width = (var < 0) ? var * -1 : var;

@@ -18,7 +18,7 @@ int		fill_in(int field, char c)
 
 	i = -1;
 	while (++i < field)
-		ft_putchar_fd(c, 1);
+		ft_putchar_fd_len(c, 1);
 	return (i);
 }
 
@@ -30,7 +30,7 @@ int		ft_putnstr_fd(char *s, int fd, int n)
 		return (0);
 	i = -1;
 	while (s[++i] && n--)
-		ft_putchar_fd(s[i], fd);
+		ft_putchar_fd_len(s[i], fd);
 	return (i);
 }
 
@@ -50,7 +50,7 @@ int		ft_putstr_fd_len(char *s, int fd)
 		return (0);
 	i = -1;
 	while (s[++i])
-		ft_putchar_fd(s[i], fd);
+		ft_putchar_fd_len(s[i], fd);
 	return (i);
 }
 

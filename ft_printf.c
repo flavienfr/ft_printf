@@ -11,17 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "stdio.h"
-
-/*
-** Check format string
-** Check args == arg de string // Pas possible ?
-** Read lanceur de fonction
-** Fonction affiche ui i d..
-** Fonctions flags (str appart ?)
-**
-** Gerer les erreur de compilation (boucle infini ou return)????
-*/
 
 int		ft_printf(const char *format, ...)
 {

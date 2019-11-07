@@ -29,7 +29,7 @@ int main ()
    	int no = 255;
    	int hex = 0X96;
    	unsigned int ui= 123456789;
-
+/*
 	printf(B"=====================PRINTF VS FT_PRINTF=====================\n\n");
 	printf("============== gestion de converstion simple ===================\n");
 	printf("---------------------	  all type      ---------------------\n"S);
@@ -67,8 +67,8 @@ int main ()
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 	printf(B"-------- TEST 3 ---------\n"S);
-	i = printf("|%-2c|\n", '\0');
-	j = ft_printf("|%-2c|\n", '\0');
+	i = printf("|%-3c|\n", '\0');
+	j = ft_printf("|%-3c|\n", '\0');
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 	printf(B"-------- TEST 4 ---------\n"S);
@@ -310,9 +310,40 @@ int main ()
 	i=printf("%05s, %10s, %-10.3s|\n", NULL, NULL, NULL);
 	j=ft_printf("%05s, %10s, %-10.3s|\n", NULL, NULL, NULL);
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);*/
+	printf(B"================= Les autres =====================\n"S);
+	printf(B"--------------- TEST 1 -------------\n"S);
+	i=printf("|%-10.10%|\n");
+	j=ft_printf("|%-10.10%|\n");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-
-	
+	printf(B"--------------- TEST 2 -------------\n"S);
+	i=printf("|%020.50%|\n");
+	j=ft_printf("|%020.50%|\n");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 3 -------------\n"S);
+	i=printf("|%020.50c|\n", 'd');
+	j=ft_printf("|%020.50c|\n",'d');
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	printf(B"--------------- TEST 3 -------------\n"S);
+	i=printf("|%020.50s|\n", "d");
+	j=ft_printf("|%020.50s|\n","d");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+//TEST 7 foirade complette
+	printf(B"--------------- TEST 4 undifined -------------\n"S);
+	i=printf("|%-10.10k|\n");
+	j=ft_printf("|%-10.10k|\n");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+		printf(B"--------------- TEST 5 undifined -------------\n"S);
+	i=printf("|%-020..-.5k|\n");
+	j=ft_printf("|%-020..-.5k|\n");
+	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+//TEST 8 foirade complette auqf 2 dernier
 
 /*
 	printf(B"===== cas impeu chelou rien a batre ? ========\n"S);
