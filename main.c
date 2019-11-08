@@ -392,6 +392,26 @@ int main ()
     (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
     printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
     printf(B"--------------- TEST 16 -------------\n"S);
+    i=printf("@moulitest: |%c|\n", 0);
+    j=ft_printf("@moulitest: |%c|\n", 0);
+    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+    printf(B"--------------- TEST 17 -------------\n"S);
+    i=printf("%2c\n", 0);
+    j=ft_printf("%2c\n", 0);
+    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+    printf(B"--------------- TEST 18 -------------\n"S);
+    i=printf("null %c and text\n", 0);
+    j=ft_printf("null %c and text\n", 0);
+    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+    printf(B"--------------- TEST 19 -------------\n"S);
+    i=printf("|%.2c|\n", NULL);
+    j=ft_printf("|%.2c|\n", NULL);
+    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+
     printf(B"============== Crash test =============\n"S);
 	printf(B"--------------- TEST 1 -------------\n"S);
    	i=printf("|%*.-30d|\n", 5, 15);
@@ -409,25 +429,5 @@ int main ()
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 	
-	    i=printf("@moulitest: |%c|\n", 0);
-    j=ft_printf("@moulitest: |%c|\n", 0);
-    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
-	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-
-    i=printf("%2c\n", 0);
-    j=ft_printf("%2c\n", 0);
-    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
-	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-
-    i=printf("null %c and text\n", 0);
-    j=ft_printf("null %c and text\n", 0);
-    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
-	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-    
-    i=printf("|%.2c|\n", NULL);
-    j=ft_printf("|%.2c|\n", NULL);
-    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
-	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
-
     return (0);
 }
