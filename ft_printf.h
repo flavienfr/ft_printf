@@ -15,8 +15,7 @@
 
 # include <stdarg.h>
 # include <stdlib.h>
-# include "../libft/libft.h"
-#include <stdio.h>//dell me
+# include "libft/libft.h"
 
 typedef struct	s_arg
 {
@@ -59,7 +58,11 @@ char			*ft_itoa_long(long n);
 int				fill_in(int field, char c);
 int				ft_putnstr_fd(char *s, int fd, int n);
 int				ft_putchar_fd_len(char c, int fd);
-int				ft_putstr_fd_len(char *s, int fd);
+int				ft_putstr_fd_len(char *s, int fd, t_arg *narg);
 int				first_in_set(char c, char *set);
+/*
+** utils_3
+*/
+char			*car_to_str(t_arg *narg);
 
 #endif

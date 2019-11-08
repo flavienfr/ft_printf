@@ -92,7 +92,7 @@ static void	parse_arg(t_arg *narg, va_list ap)
 	else if (narg->type == '%')
 		narg->arg = ft_strdup("%");
 	else
-		narg->arg = ft_strdup(&narg->type);
+		narg->arg = car_to_str(narg);
 	if (narg->arg == NULL)
 		narg->arg = ft_strdup("(null)");
 	if (narg->type == 'c')
@@ -108,8 +108,8 @@ void		parser(const char *format, va_list ap, t_arg **lst)
 	t_arg	*narg;
 	char	*str;
 
-	i = -1;
-	while (format[++i])
+	i = 0;
+	while (format[i])
 	{
 		if (format[i] == '%')
 		{
@@ -124,5 +124,7 @@ void		parser(const char *format, va_list ap, t_arg **lst)
 			arg_lstadd_back(lst, narg);
 			free(str);
 		}
+		if (format[i])
+			i++;
 	}
 }

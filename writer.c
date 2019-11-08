@@ -24,7 +24,7 @@ static int	write_digit(t_arg *narg, int len)
 		len += ft_putchar_fd_len('-', 1);
 		if (narg->digit > 0)
 			len += fill_in(narg->digit, '0');
-		len += ft_putstr_fd_len(&narg->arg[1], 1);
+		len += ft_putstr_fd_len(&narg->arg[1], 1, narg);
 		return (len);
 	}
 	if (narg->digit > 0)
@@ -32,12 +32,15 @@ static int	write_digit(t_arg *narg, int len)
 	if (narg->prec && narg->precision < len && narg->type == 's')
 		len += ft_putnstr_fd(narg->arg, 1, narg->precision);
 	else
-		len += ft_putstr_fd_len(narg->arg, 1);
+		len += ft_putstr_fd_len(narg->arg, 1, narg);
 	return (len);
 }
 
 static int	write_width(t_arg *narg, int len)
 {
+	if (*narg->arg == '-' && narg->type != 's' && narg->type != 'c'
+		&& narg->sign != -1 && narg->precision > narg->len - 1)
+		narg->width -= narg->len - 1;
 	if (narg->type != '%' && narg->type != 'c'
 		&& ((narg->prec && narg->precision < narg->len && (narg->type == 's'))
 		|| (narg->precision > narg->len && (narg->type != 's'))))
@@ -59,7 +62,7 @@ static int	write_precision(t_arg *narg, int len)
 	if (narg->type == 's')
 		len += ft_putnstr_fd(narg->arg, 1, narg->precision);
 	else if (narg->type == 'c' || narg->type == 'p' || narg->type == '%')
-		return (len += ft_putstr_fd_len(narg->arg, 1));
+		return (len += ft_putstr_fd_len(narg->arg, 1, narg));
 	else
 	{
 		if (narg->precision == 0 && narg->prec
@@ -70,7 +73,7 @@ static int	write_precision(t_arg *narg, int len)
 			len += ft_putchar_fd_len('-', 1);
 			if (narg->precision - (narg->len - 1) > 0)
 				len += fill_in(narg->precision - (narg->len - 1), '0');
-			len += ft_putstr_fd_len(&narg->arg[1], 1);
+			len += ft_putstr_fd_len(&narg->arg[1], 1, narg);
 			if (narg->precision < narg->width
 			&& narg->precision > narg->len - 1)
 				narg->width--;
@@ -78,7 +81,7 @@ static int	write_precision(t_arg *narg, int len)
 		}
 		if (narg->precision - narg->len > 0)
 			len += fill_in(narg->precision - narg->len, '0');
-		len += ft_putstr_fd_len(narg->arg, 1);
+		len += ft_putstr_fd_len(narg->arg, 1, narg);
 	}
 	return (len);
 }
@@ -102,7 +105,7 @@ static int	write_arg(t_arg *narg, int len)
 	if (narg->prec)
 		len = write_precision(narg, len);
 	else
-		len += ft_putstr_fd_len(narg->arg, 1);
+		len += ft_putstr_fd_len(narg->arg, 1, narg);
 	if (narg->width > 0 && narg->sign == -1)
 		len = write_width(narg, len);
 	return (len);
@@ -112,13 +115,13 @@ int			writer(const char *format, t_arg *narg, int len)
 {
 	int	i;
 
-	i = -1;
-	while (format[++i])
+	i = 0;
+	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			++i;
-			while (!(first_in_set(format[i], "cspdiuxX%")) && format[i + 1]
+			while (!(first_in_set(format[i], "cspdiuxX%")) && format[i]
 				&& first_in_set(format[i], "0123456789.-*"))
 				i++;
 			len = write_arg(narg, len);
@@ -126,6 +129,8 @@ int			writer(const char *format, t_arg *narg, int len)
 		}
 		else
 			len += ft_putchar_fd_len(format[i], 1);
+		if (format[i])
+			i++;
 	}
 	return (len);
 }

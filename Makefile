@@ -1,4 +1,4 @@
-SRCS = ft_printf.c parser.c writer.c utils_1.c utils_2.c libft_1.c libft_2.c
+SRCS = ft_printf.c parser.c writer.c utils_1.c utils_2.c utils_3.c libft/libft_1.c libft/libft_2.c
 
 NAME = libftprintf.a
 

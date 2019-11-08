@@ -42,12 +42,17 @@ int		ft_putchar_fd_len(char c, int fd)
 	return (1);
 }
 
-int		ft_putstr_fd_len(char *s, int fd)
+int		ft_putstr_fd_len(char *s, int fd, t_arg *narg)
 {
 	int	i;
 
 	if (!s || fd <= 0)
 		return (0);
+	if (narg->type == 'c' && *s == '\0')
+	{
+		ft_putchar_fd_len(*s, fd);
+		return (0);
+	}
 	i = -1;
 	while (s[++i])
 		ft_putchar_fd_len(s[i], fd);
