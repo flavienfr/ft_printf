@@ -408,6 +408,26 @@ int main ()
 	j=ft_printf("...%.......5d..%....%-5d....%...*d..\n", 14, 14, -5);
 	(i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n");
 	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+	
+	    i=printf("@moulitest: |%c|\n", 0);
+    j=ft_printf("@moulitest: |%c|\n", 0);
+    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+
+    i=printf("%2c\n", 0);
+    j=ft_printf("%2c\n", 0);
+    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+
+    i=printf("null %c and text\n", 0);
+    j=ft_printf("null %c and text\n", 0);
+    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
+    
+    i=printf("|%.2c|\n", NULL);
+    j=ft_printf("|%.2c|\n", NULL);
+    (i != j) ? printf(R"KO Diff return\n") : printf(G"OK\n") ;
+	printf("RETURN = printf :%d ft_printf: %d\n"S, i, j);
 
     return (0);
 }
