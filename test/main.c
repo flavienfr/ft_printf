@@ -6,11 +6,11 @@
 /*   By: froussel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 14:37:54 by froussel          #+#    #+#             */
-/*   Updated: 2019/11/11 15:17:43 by froussel         ###   ########.fr       */
+/*   Updated: 2019/11/11 15:23:37 by froussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 #include <stdio.h>
 #define R "\x1b[31m"
 #define G "\x1b[32m"
